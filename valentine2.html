@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I LOVE YOU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8d7da; /* нежно розовый фон */
+        }
+        .container {
+            max-width: 800px;
+            margin: 10% auto;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            position: relative; /* чтобы разместить гифку относительно контейнера */
+        }
+        h1 {
+            color: #ff69b4; /* розовый цвет текста заголовка */
+        }
+        button {
+            background-color: #808080; /* серый цвет кнопок */
+            color: #ff69b4; /* розовый текст кнопок */
+            font-weight: bold; /* жирный текст кнопок */
+            padding: 15px 25px; /* увеличение размера кнопок */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease; /* анимация при наведении на кнопки */
+        }
+        button:hover {
+            background-color: #d3d3d3; /* изменение цвета при наведении на кнопки */
+        }
+        .gif-frame {
+            max-width: 30%; /* Ширина гифки */
+            height: auto;
+            display: inline-block; /* Размещаем гифки в одной строке */
+            margin: 10px; /* Расстояние между гифками */
+            border: 5px solid #ff69b4; /* Розовая рамка вокруг гифок */
+            border-radius: 10px; /* Скругление углов рамки */
+        }
+        .hidden {
+            display: none; /* скрывает элемент */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="gif-frame" src="https://i.pinimg.com/originals/d2/f7/90/d2f790978f11b5bb2f1ff38124a9a47a.gif" alt="Рамка" id="gifImage">
+        <h1 id="question">Будешь моей валентинкой?</h1>
+        <button id="noBtn" onclick="changeGif()">Нет</button>
+        <button id="yesBtn" onclick="changeYesGif()">Да</button>
+        <div id="gifContainer" class="hidden">
+            <!-- Гифки будут здесь -->
+        </div>
+        <p id="loveText" class="hidden"><b>Сегодня чудесный день, праздник всех влюблённых и в этот день хочу тебе сказать о своих чувствах к тебе.
+            Я очень сильно тебя люблю, ты великолепная девочка. Я тебя очень ценю, ценю всё что ты сделала для меня, хочу сказать тебе огромное спасибо за внимание которое ты мне подарила. Ты безумно красива, и твои черты лица затмевают взор, у тебя чудесный голос, который приятно слушать, он не сравнится не с одним музыкальным творением, он превосходит все границы превосходства. Твои карие глаза изумительны, смотря в них забываешь о всех проблемах и тревожные мысли утекают, оставляя лишь мысли о том насколько твои глаза прекрасны. У тебя чудесная улыбка, при виде её хочется рыдать от счастья, она напрочь отбивает все тревожные или плохие мысли, это как самый сильный наркотик от которого просто невозможно оторваться. А твои рыжие волосы, просто рай в котором хотелось бы утонуть и забыть обо всём. Ты действительно самая красивая и изумительная девочка. Я никогда не встречал никого красивее тебя.. Я очень сильно тебя люблю, и желаю чтобы у тебя всегда всё было хорошо, ты достойна лучшего. Надеюсь я хоть капельку смог обрадовать тебя своими словами, правда стыдно что я написал такой маленький текст.. но у меня просто не хватает слов описать всё чудесное что в тебе есть. Люблю тебя очень сильно..</b></p>
+    
+        </div>
+
+    <script>
+        var gifs = [
+            "https://i.pinimg.com/originals/1a/e3/8c/1ae38cf1d64b9c7e37e9887f39e4a18f.gif",
+            "https://i.pinimg.com/originals/8b/ac/bf/8bacbf108a684219913e71186be62dab.gif",
+            "https://www.icegif.com/wp-content/uploads/da-bears-icegif-18.gif",
+            "https://www.icegif.com/wp-content/uploads/da-bears-icegif-14.gif",
+            "https://www.icegif.com/wp-content/uploads/da-bears-icegif-19.gif"
+        ];
+        var currentGifIndex = 0;
+
+        function changeGif() {
+            var gifImage = document.getElementById('gifImage');
+            gifImage.src = gifs[currentGifIndex];
+            currentGifIndex = (currentGifIndex + 1) % gifs.length;
+
+            increaseButtonSize(); // Увеличиваем кнопку "Да" при смене гифки
+        }
+
+        var yesGifs = [
+            "https://i.pinimg.com/originals/cd/d0/15/cdd015f314fd3b31de57859c88a1d728.gif",
+            "https://i.pinimg.com/originals/ee/f1/8e/eef18ec08f5d93096607e804a508703c.gif",
+            "https://i.pinimg.com/originals/de/d5/20/ded520423e25c811bbff951c61a337f2.gif"
+        ];
+        var currentYesGifIndex = 0;
+
+        function changeYesGif() {
+            hideElements(); // Скрываем текст и кнопки после выбора "Да"
+            showGifsAndText(); // Показываем гифки и текст о любви к девушке
+            var nextPageBtn = document.getElementById("nextPageBtn");
+            nextPageBtn.classList.remove("hidden");
+        }
+       
+
+        function increaseButtonSize() {
+            var yesButton = document.getElementById("yesBtn");
+            var computedStyle = window.getComputedStyle(yesButton);
+            var fontSize = parseInt(computedStyle.getPropertyValue('font-size'));
+            yesButton.style.fontSize = (fontSize + 10) + "px";
+        }
+
+        function hideElements() {
+            var question = document.getElementById("question");
+            var noButton = document.getElementById("noBtn");
+            var yesButton = document.getElementById("yesBtn");
+            question.classList.add("hidden");
+            noButton.classList.add("hidden");
+            yesButton.classList.add("hidden");
+
+            var initialGif = document.getElementById('gifImage');
+            initialGif.classList.add('hidden');
+        }
+
+        function showGifsAndText() {
+            var gifContainer = document.getElementById("gifContainer");
+            var loveText = document.getElementById("loveText");
+            gifContainer.innerHTML = ""; // Очищаем содержимое контейнера
+
+            for (var i = 0; i < yesGifs.length; i++) {
+                var img = document.createElement('img');
+                img.src = yesGifs[i];
+                img.classList.add('gif-frame');
+                gifContainer.appendChild(img);
+            }
+
+            gifContainer.classList.remove("hidden");
+            loveText.classList.remove("hidden");
+            // Здесь можно добавить гифки и текст к любви
+        }
+    </script>
+</body>
+</html>
